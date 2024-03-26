@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todomvvm/model/todo.dart';
 import 'dart:convert';
 
-class DataSource {
+class TodoLocalDataSource {
   static const String _todoListKey = 'todoList';
 
   Future<List<Todo>> getTodoList() async {
