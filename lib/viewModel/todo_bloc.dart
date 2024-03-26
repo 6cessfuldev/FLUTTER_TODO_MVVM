@@ -11,6 +11,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       : _todoRepository = todoRepository,
         super(TodosLoadInProgress()) {
     on<TodoAdded>(_onTodoAdded);
+    on<TodoUpdated>(_onTodoUpdated);
     on<TodoDeleted>(_onTodoDeleted);
     on<TodosLoaded>(_onTodosLoaded);
   }
@@ -18,6 +19,15 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Future<void> _onTodoAdded(TodoAdded event, Emitter<TodoState> emit) async {
     if (state is TodosLoadSuccess) {
       await _todoRepository.addTodo(event.todo);
+      final List<Todo> updatedTodos = await _todoRepository.getTodoList();
+      emit(TodosLoadSuccess(updatedTodos));
+    }
+  }
+
+  Future<void> _onTodoUpdated(
+      TodoUpdated event, Emitter<TodoState> emit) async {
+    if (state is TodosLoadSuccess) {
+      await _todoRepository.updateTodo(event.todo);
       final List<Todo> updatedTodos = await _todoRepository.getTodoList();
       emit(TodosLoadSuccess(updatedTodos));
     }
