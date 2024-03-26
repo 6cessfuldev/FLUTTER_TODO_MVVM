@@ -19,4 +19,8 @@ class TodoRepository {
   Future<bool> removeTodo(String id) {
     return _dataSource.removeTodo(id);
   }
+
+  Future<bool> updateTodo(Todo updatedTodo) {
+    return _dataSource.updateTodo(updatedTodo);
+  }
 }

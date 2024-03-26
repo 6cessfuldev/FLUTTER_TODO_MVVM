@@ -37,4 +37,14 @@ class TodoLocalDataSource {
     todoList.removeWhere((item) => item.id == id);
     return saveTodoList(todoList);
   }
+
+  Future<bool> updateTodo(Todo updatedTodo) async {
+    final List<Todo> todoList = await getTodoList();
+    final int index = todoList.indexWhere((todo) => todo.id == updatedTodo.id);
+    if (index != -1) {
+      todoList[index] = updatedTodo;
+      return await saveTodoList(todoList);
+    }
+    return false;
+  }
 }
