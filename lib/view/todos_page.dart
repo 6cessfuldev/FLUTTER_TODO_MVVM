@@ -84,6 +84,12 @@ class TodosPage extends StatelessWidget {
                       .add(TodoUpdated(todo.copyWith(isCompleted: newValue!)));
                 },
               ),
+              trailing: IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  context.read<TodoBloc>().add(TodoDeleted(todo.id));
+                },
+              ),
             );
           },
         );
