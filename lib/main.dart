@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todomvvm/repository/todo_repository.dart';
 import 'package:todomvvm/view/todos_page.dart';
 import 'package:todomvvm/viewModel/todo_bloc.dart';
+import 'package:todomvvm/viewModel/todo_event.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
-        create: (context) => TodoBloc(todoRepository),
+        create: (context) => TodoBloc(todoRepository)..add(TodosLoaded()),
         child: const TodosPage(),
       ),
     );
